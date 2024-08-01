@@ -1,0 +1,9 @@
+<h2>Cars</h2>
+<hr>
+
+{% for car in cars %}
+    <h3>{{ car.model }}</h3>
+    <p>{{ car.year }}</p>
+    <p>{{ car.price }}</p>
+    <hr>
+{% endfor %}

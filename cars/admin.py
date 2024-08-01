@@ -25,7 +25,7 @@ class CarAdmin(admin.ModelAdmin):
     list_filter = ('model', 'brand', 'factory_year', 'model_year', 'value')
     search_fields = ('model', 'brand', 'factory_year', 'model_year', 'value')
     ordering = ['model', 'brand', 'factory_year', 'model_year', 'value']
-    fields = ('model', 'brand', 'factory_year', 'model_year', 'value', 'photo')
+    fields = ('model', 'brand', 'factory_year', 'model_year', 'value', 'plate', 'photo')
 
 
 admin.site.register(Brand, BrandAdmin)
