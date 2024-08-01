@@ -1,9 +1,22 @@
-<h2>Cars</h2>
-<hr>
+{% load humanize %}
 
-{% for car in cars %}
-    <h3>{{ car.model }}</h3>
-    <p>{{ car.year }}</p>
-    <p>{{ car.price }}</p>
-    <hr>
-{% endfor %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  {% block content %}
+    {% for car in cars %}
+      <p><img src={{ car.photo.url }} width="200" height="120" /></p>
+      <h3>{{ car.model }}</h3>
+      <p>{{ car.brand }}</p>
+      <p>{{ car.value }}</p>
+      <p>R$ {{ car.value|intcomma }}</p>
+      <hr>
+    {% endfor %}
+  {% endblock %}
+</body>
+</html>
