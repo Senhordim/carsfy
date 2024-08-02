@@ -21,8 +21,8 @@ class CarAdmin(admin.ModelAdmin):
 
     image_tag.short_description = 'Image'
 
-    list_display = ('image_tag', 'model', 'brand', 'factory_year', 'model_year', 'value')
-    list_filter = ('model', 'brand', 'factory_year', 'model_year', 'value')
+    list_display = ('image_tag', 'model', 'brand', 'model_year', 'value', 'created_at')
+    list_filter = ('model', 'brand', 'model_year', 'value')
     search_fields = ('model', 'brand', 'factory_year', 'model_year', 'value')
     ordering = ['model', 'brand', 'factory_year', 'model_year', 'value']
     fields = ('model', 'brand', 'factory_year', 'model_year', 'value', 'plate', 'photo')
