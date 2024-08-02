@@ -22,3 +22,20 @@ class CarForm(forms.Form):
         )
         car.save()
         return car
+
+class CarModelForm (forms.ModelForm):
+    class Meta:
+        model = Car
+        fields = '__all__'
+
+    def clean_plate(self):
+        plate = self.cleaned_data.get('plate')
+        if Car.objects.filter(plate=plate).exists():
+            raise forms.ValidationError('Plate already exists')
+        return plate
+
+    def clean_value(self):
+        value = self.cleaned_data.get('value')
+        if value < 10000.0:
+            raise forms.ValidationError('Valor mínimo deve ser de R$10.000,00')
+        return value
