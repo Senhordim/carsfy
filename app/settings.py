@@ -25,7 +25,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'crispy_forms',
+    'crispy_tailwind',
     'cars',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -57,6 +60,10 @@ TEMPLATES = [
         },
     },
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+
+CRISPY_TEMPLATE_PACK = "tailwind"
 
 WSGI_APPLICATION = 'app.wsgi.application'
 

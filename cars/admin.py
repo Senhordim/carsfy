@@ -1,6 +1,5 @@
 from django.contrib import admin
-from django.utils.html import format_html
-from django.utils.html import escape
+from django.utils.html import format_html, escape
 from cars.models import Car, Brand
 
 # Register your models here.
