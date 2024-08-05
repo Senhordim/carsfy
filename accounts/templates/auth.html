@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% load crispy_forms_tags %}
+
+{% load tailwind_field %}
+
+{% block content %}
+  <section class="bg-white py-8">
+    <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12">
+      <form method="post">
+        {% csrf_token %}
+          {{ user_form_authentication | crispy }}
+        <input type="submit" value="Save" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      </form>
+    </div>
+  </section>
+{% endblock %}
