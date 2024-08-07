@@ -1,24 +1,24 @@
-from django.shortcuts import render, redirect
+from django.views.generic import ListView, CreateView
 from cars.models import Car
 from cars.forms import CarModelForm
 
-def index(request):
-  cars = Car.objects.all().order_by('created_at')
-  search = request.GET.get('search')
-  if search:
-    cars = Car.objects.filter(model__icontains=search)
-  return render(request, 'index.html', context={'cars': cars})
+class CarsListView(ListView):
+    model = Car
+    template_name = 'index.html'
+    context_object_name = 'cars'
 
-def new(request):
-  if request.method == 'POST':
-    new_car_form = CarModelForm(request.POST, request.FILES)
-    if new_car_form.is_valid():
-      new_car_form.save()
-      return redirect('index')
-  if request.method == 'GET':
-    new_car_form = CarModelForm()
-  return render(request, 'new.html', context={'new_car_form': new_car_form})
+    def get_queryset(self):
+        cars = super().get_queryset().order_by('-created_at')
+        search = self.request.GET.get('search')
+        if search:
+            cars = Car.objects.filter(model__icontains=search)
+        return cars
 
+class CarsCreateView(CreateView):
+    model = Car
+    template_name = 'new.html'
+    form_class = CarModelForm
+    success_url = '/'
 
 
 

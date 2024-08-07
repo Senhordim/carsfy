@@ -59,6 +59,14 @@
         color: #000;
         /*Set to match the Tailwind colour you want the active one to be */
     }
+
+    .fade-out {
+      opacity: 1;
+      transition: opacity 1s ease-out;
+    }
+    .fade-out.hide {
+      opacity: 0;
+    }
 </style>
 </head>
 <body class="bg-white text-gray-600 work-sans leading-normal text-base tracking-normal">
@@ -115,6 +123,20 @@
         </div>
     </div>
   </nav>
+
+  {% if messages %}
+    {% for msg in messages %}
+      <div class="fade-out bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert" id="alert">
+        <div class="flex">
+          <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+          <div>
+            <p class="font-bold">Sucesso!</p>
+            <p class="text-sm">{{msg.message}}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
 
   {% block content %}
 
@@ -177,6 +199,19 @@
       </div>
     </div>
   </footer>
+
+  <script>
+      var div = document.getElementById('alert');
+      if(div){
+        window.setTimeout(function() {
+          div.classList.toggle('hide');
+          div.addEventListener('transitionend', function() {
+            div.remove();
+          });
+        }, 4000);
+      }
+
+  </script>
 
 </body>
 </html>

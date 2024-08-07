@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 
 
 def logout_site(request):
   logout(request)
+  messages.success(request, 'Usuário deslogado com sucesso!')
   return redirect('index')
 
 def auth(request):
@@ -14,6 +16,7 @@ def auth(request):
     user = authenticate(request, username=username, password=password)
     if user is not None:
       login(request, user)
+      messages.success(request, 'The post has been created successfully.')
       return redirect('index')
     else:
       return redirect('auth')
@@ -27,6 +30,9 @@ def register(request):
     if user_form.is_valid():
       user_form.save()
       return redirect('auth')
+    else:
+      messages.error(request, 'Erro ao criar usuário')
+      return redirect('register')
   else:
     user_form = UserCreationForm()
   return render(request, 'register.html', context={'user_form': user_form})
