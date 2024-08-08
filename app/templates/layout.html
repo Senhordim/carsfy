@@ -126,12 +126,15 @@
 
   {% if messages %}
     {% for msg in messages %}
-      <div class="fade-out bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert" id="alert">
+      <div
+        class="fade-out bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
+        role="alert"
+        id="alert"
+      >
         <div class="flex">
-          <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
           <div>
             <p class="font-bold">Sucesso!</p>
-            <p class="text-sm">{{msg.message}}</p>
+            <p class="text-sm">{{ msg.message }}</p>
           </div>
         </div>
       </div>
@@ -143,7 +146,7 @@
   {% endblock %}
 
   <!-- Section SObre -->
-  <section class="bg-white py-8">
+  <!-- <section class="bg-white py-8">
     <div class="container py-8 px-6 mx-auto">
         <a class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl mb-8" href="#">
           Sobre
@@ -154,7 +157,7 @@
             <a class="text-gray-800 underline hover:text-gray-900" href="http://savoy.nordicmade.com/" target="_blank">Savoy Theme</a> created by <a class="text-gray-800 underline hover:text-gray-900" href="https://nordicmade.com/">https://nordicmade.com/</a> and <a class="text-gray-800 underline hover:text-gray-900" href="https://www.metricdesign.no/" target="_blank">https://www.metricdesign.no/</a></p>
         <p class="mb-8">Lorem ipsum dolor sit amet, consectetur <a href="#">random link</a> adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat. Vitae aliquet nec ullamcorper sit. Nullam eget felis eget nunc lobortis mattis aliquam. In est ante in nibh mauris. Egestas congue quisque egestas diam in. Facilisi nullam vehicula ipsum a arcu. Nec nam aliquam sem et tortor consequat. Eget mi proin sed libero enim sed faucibus turpis in. Hac habitasse platea dictumst quisque. In aliquam sem fringilla ut. Gravida rutrum quisque non tellus orci ac auctor augue mauris. Accumsan lacus vel facilisis volutpat est velit egestas dui id. At tempor commodo ullamcorper a. Volutpat commodo sed egestas egestas fringilla. Vitae congue eu consequat ac.</p>
     </div>
-  </section>
+  </section> -->
 
   <!-- Footer -->
   <footer class="container mx-auto bg-white py-8 border-t border-gray-400">
@@ -210,6 +213,19 @@
           });
         }, 4000);
       }
+
+      var modal = document.getElementById('modal');
+      modal.style.display = 'none';
+      function toggleDiv() {
+        if(modal){
+          modal.style.display === 'none';
+          if (modal.style.display === 'none' || modal.style.display === '') {
+              modal.style.display = 'block'; // Mostrar a modal
+          } else {
+              modal.style.display = 'none'; // Esconder a modal
+          }
+        }
+    }
 
   </script>
 
