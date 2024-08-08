@@ -16,7 +16,7 @@ def auth(request):
     user = authenticate(request, username=username, password=password)
     if user is not None:
       login(request, user)
-      messages.success(request, 'The post has been created successfully.')
+      messages.success(request, 'Usuário logado com sucesso!')
       return redirect('index')
     else:
       return redirect('auth')

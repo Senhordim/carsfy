@@ -42,10 +42,12 @@
             <dt class="font-medium text-gray-900">Ano de Lançamento</dt>
             <dd class="mt-2 text-sm text-gray-500">{{ object.model_year }}</dd>
           </div>
-          <div class="border-t border-gray-200 pt-4">
-            <dt class="font-medium text-gray-900">Finish</dt>
-            <dd class="mt-2 text-sm text-gray-500">Hand sanded and finished with natural oil</dd>
-          </div>
+          {% if object.plate %}
+            <div class="border-t border-gray-200 pt-4">
+              <dt class="font-medium text-gray-900">Placa</dt>
+              <dd class="mt-2 text-sm text-gray-500">{{ object.plate }}</dd>
+            </div>
+          {% endif %}
         </dl>
       </div>
     </div>
@@ -92,7 +94,7 @@
                   href="#"
                   onclick="toggleDiv()"
                   class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                >Cancelar</a>
+                >Não</a>
               </div>
             </div>
           </div>

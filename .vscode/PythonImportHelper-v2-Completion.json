@@ -450,7 +450,7 @@
         "kind": 2,
         "importPath": "accounts.views",
         "description": "accounts.views",
-        "peekOfCode": "def auth(request):\n  if request.method == 'POST':\n    username = request.POST['username']\n    password = request.POST['password']\n    user = authenticate(request, username=username, password=password)\n    if user is not None:\n      login(request, user)\n      messages.success(request, 'The post has been created successfully.')\n      return redirect('index')\n    else:",
+        "peekOfCode": "def auth(request):\n  if request.method == 'POST':\n    username = request.POST['username']\n    password = request.POST['password']\n    user = authenticate(request, username=username, password=password)\n    if user is not None:\n      login(request, user)\n      messages.success(request, 'Usuário logado com sucesso!')\n      return redirect('index')\n    else:",
         "detail": "accounts.views",
         "documentation": {}
     },

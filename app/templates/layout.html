@@ -87,7 +87,15 @@
                 <ul class="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
                     <li><a class="inline-block no-underline hover:text-black hover:underline py-2 px-4" href="/">Ofertas</a></li>
                     {% if user.is_authenticated %}
-                      <li><a class="inline-block no-underline hover:text-black hover:underline py-2 px-4" href="{% url 'new' %}">Cadastrar</a></li>
+                      <li>
+                        <a
+                          href="{% url 'new' %}"
+                          class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                      >
+                        Anunciar
+                      </a>
+
+                      </li>
                     {% endif %}
                 </ul>
             </nav>
@@ -113,8 +121,15 @@
             {% endif %}
 
             {% if user.is_authenticated %}
-              <p>Olá, {{ user.username }}</p>
-              <p><a class="inline-block no-underline hover:text-black hover:underline py-2 px-4" href="{% url 'logout' %}">Sair</a></p>
+              <p>Olá, {{ user.username }}
+
+                <a
+                  href="{% url 'logout' %}"
+                  class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                >
+                  Sair
+                </a>
+              </p>
             {% endif %}
 
             {% if not user.is_authenticated %}
