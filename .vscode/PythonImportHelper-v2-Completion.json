@@ -72,6 +72,22 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -298,6 +314,14 @@
         "documentation": {}
     },
     {
+        "label": "Car",
+        "importPath": "cars.models",
+        "description": "cars.models",
+        "isExtraImport": true,
+        "detail": "cars.models",
+        "documentation": {}
+    },
+    {
         "label": "forms",
         "importPath": "django",
         "description": "django",
@@ -311,6 +335,46 @@
         "description": "django.utils",
         "isExtraImport": true,
         "detail": "django.utils",
+        "documentation": {}
+    },
+    {
+        "label": "pre_save",
+        "importPath": "django.db.models.signals",
+        "description": "django.db.models.signals",
+        "isExtraImport": true,
+        "detail": "django.db.models.signals",
+        "documentation": {}
+    },
+    {
+        "label": "post_save",
+        "importPath": "django.db.models.signals",
+        "description": "django.db.models.signals",
+        "isExtraImport": true,
+        "detail": "django.db.models.signals",
+        "documentation": {}
+    },
+    {
+        "label": "pre_delete",
+        "importPath": "django.db.models.signals",
+        "description": "django.db.models.signals",
+        "isExtraImport": true,
+        "detail": "django.db.models.signals",
+        "documentation": {}
+    },
+    {
+        "label": "post_delete",
+        "importPath": "django.db.models.signals",
+        "description": "django.db.models.signals",
+        "isExtraImport": true,
+        "detail": "django.db.models.signals",
+        "documentation": {}
+    },
+    {
+        "label": "receiver",
+        "importPath": "django.dispatch",
+        "description": "django.dispatch",
+        "isExtraImport": true,
+        "detail": "django.dispatch",
         "documentation": {}
     },
     {
@@ -689,6 +753,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "cars.migrations.0002_car_description",
+        "description": "cars.migrations.0002_car_description",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('cars', '0001_initial'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='car',\n            name='description',\n            field=models.TextField(blank=True, null=True),\n        ),",
+        "detail": "cars.migrations.0002_car_description",
+        "documentation": {}
+    },
+    {
         "label": "BrandAdmin",
         "kind": 6,
         "importPath": "cars.admin",
@@ -711,7 +784,7 @@
         "kind": 6,
         "importPath": "cars.apps",
         "description": "cars.apps",
-        "peekOfCode": "class CarsConfig(AppConfig):\n    default_auto_field = 'django.db.models.BigAutoField'\n    name = 'cars'",
+        "peekOfCode": "class CarsConfig(AppConfig):\n    default_auto_field = 'django.db.models.BigAutoField'\n    name = 'cars'\n    def ready(self):\n        import cars.signals",
         "detail": "cars.apps",
         "documentation": {}
     },
@@ -738,8 +811,44 @@
         "kind": 6,
         "importPath": "cars.models",
         "description": "cars.models",
-        "peekOfCode": "class Car(models.Model):\n    id = models.AutoField(primary_key=True)\n    model = models.CharField(max_length=200)\n    brand = models.ForeignKey(Brand, on_delete=models.PROTECT, related_name='car_brand')\n    factory_year = models.IntegerField(blank=True, null=True)\n    model_year = models.IntegerField(blank=True, null=True)\n    plate = models.CharField(max_length=200, blank=True, null=True)\n    value = models.FloatField(blank=True, null=True)\n    photo = models.ImageField(upload_to='cars/', blank=True, null=True)\n    created_at = models.DateTimeField(auto_now_add=True)",
+        "peekOfCode": "class Car(models.Model):\n    id = models.AutoField(primary_key=True)\n    model = models.CharField(max_length=200)\n    description = models.TextField(blank=True, null=True)\n    brand = models.ForeignKey(Brand, on_delete=models.PROTECT, related_name='car_brand')\n    factory_year = models.IntegerField(blank=True, null=True)\n    model_year = models.IntegerField(blank=True, null=True)\n    plate = models.CharField(max_length=200, blank=True, null=True)\n    value = models.FloatField(blank=True, null=True)\n    photo = models.ImageField(upload_to='cars/', blank=True, null=True)",
         "detail": "cars.models",
+        "documentation": {}
+    },
+    {
+        "label": "car_pre_save",
+        "kind": 2,
+        "importPath": "cars.signals",
+        "description": "cars.signals",
+        "peekOfCode": "def car_pre_save(sender, instance, **kwargs):\n    print('Car pre save signal')\n@receiver(post_save, sender=Car)\ndef car_post_save(sender, instance, **kwargs):\n    print('Car post save signal')\n@receiver(pre_delete, sender=Car)\ndef car_post_save(sender, instance, **kwargs):\n    print('Car pre delete signal')\n@receiver(post_delete, sender=Car)\ndef car_post_save(sender, instance, **kwargs):",
+        "detail": "cars.signals",
+        "documentation": {}
+    },
+    {
+        "label": "car_post_save",
+        "kind": 2,
+        "importPath": "cars.signals",
+        "description": "cars.signals",
+        "peekOfCode": "def car_post_save(sender, instance, **kwargs):\n    print('Car post save signal')\n@receiver(pre_delete, sender=Car)\ndef car_post_save(sender, instance, **kwargs):\n    print('Car pre delete signal')\n@receiver(post_delete, sender=Car)\ndef car_post_save(sender, instance, **kwargs):\n    print('Car post delete signal')",
+        "detail": "cars.signals",
+        "documentation": {}
+    },
+    {
+        "label": "car_post_save",
+        "kind": 2,
+        "importPath": "cars.signals",
+        "description": "cars.signals",
+        "peekOfCode": "def car_post_save(sender, instance, **kwargs):\n    print('Car pre delete signal')\n@receiver(post_delete, sender=Car)\ndef car_post_save(sender, instance, **kwargs):\n    print('Car post delete signal')",
+        "detail": "cars.signals",
+        "documentation": {}
+    },
+    {
+        "label": "car_post_save",
+        "kind": 2,
+        "importPath": "cars.signals",
+        "description": "cars.signals",
+        "peekOfCode": "def car_post_save(sender, instance, **kwargs):\n    print('Car post delete signal')",
+        "detail": "cars.signals",
         "documentation": {}
     },
     {

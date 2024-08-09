@@ -12,6 +12,7 @@ class Brand(models.Model):
 class Car(models.Model):
     id = models.AutoField(primary_key=True)
     model = models.CharField(max_length=200)
+    description = models.TextField(blank=True, null=True)
     brand = models.ForeignKey(Brand, on_delete=models.PROTECT, related_name='car_brand')
     factory_year = models.IntegerField(blank=True, null=True)
     model_year = models.IntegerField(blank=True, null=True)
