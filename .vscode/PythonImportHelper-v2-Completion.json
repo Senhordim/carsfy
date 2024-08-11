@@ -88,6 +88,22 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -314,6 +330,14 @@
         "documentation": {}
     },
     {
+        "label": "CarInventory",
+        "importPath": "cars.models",
+        "description": "cars.models",
+        "isExtraImport": true,
+        "detail": "cars.models",
+        "documentation": {}
+    },
+    {
         "label": "Car",
         "importPath": "cars.models",
         "description": "cars.models",
@@ -338,11 +362,11 @@
         "documentation": {}
     },
     {
-        "label": "pre_save",
-        "importPath": "django.db.models.signals",
-        "description": "django.db.models.signals",
+        "label": "Sum",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
         "isExtraImport": true,
-        "detail": "django.db.models.signals",
+        "detail": "django.db.models",
         "documentation": {}
     },
     {
@@ -354,7 +378,7 @@
         "documentation": {}
     },
     {
-        "label": "pre_delete",
+        "label": "post_delete",
         "importPath": "django.db.models.signals",
         "description": "django.db.models.signals",
         "isExtraImport": true,
@@ -362,7 +386,7 @@
         "documentation": {}
     },
     {
-        "label": "post_delete",
+        "label": "pre_save",
         "importPath": "django.db.models.signals",
         "description": "django.db.models.signals",
         "isExtraImport": true,
@@ -762,6 +786,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "cars.migrations.0003_carinventory",
+        "description": "cars.migrations.0003_carinventory",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('cars', '0002_car_description'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='CarInventory',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),\n                ('cars_count', models.IntegerField()),",
+        "detail": "cars.migrations.0003_carinventory",
+        "documentation": {}
+    },
+    {
         "label": "BrandAdmin",
         "kind": 6,
         "importPath": "cars.admin",
@@ -775,7 +808,7 @@
         "kind": 6,
         "importPath": "cars.admin",
         "description": "cars.admin",
-        "peekOfCode": "class CarAdmin(admin.ModelAdmin):\n    def image_tag(self, obj):\n      return format_html('<img src=\"%s\" width=\"100\" height=\"60\" />' % escape(obj.photo.url))\n    image_tag.short_description = 'Image'\n    list_display = ('image_tag', 'model', 'brand', 'model_year', 'value', 'created_at')\n    list_filter = ('model', 'brand', 'model_year', 'value')\n    search_fields = ('model', 'brand', 'factory_year', 'model_year', 'value')\n    ordering = ['model', 'brand', 'factory_year', 'model_year', 'value']\n    fields = ('model', 'brand', 'factory_year', 'model_year', 'value', 'plate', 'photo')\nadmin.site.register(Brand, BrandAdmin)",
+        "peekOfCode": "class CarAdmin(admin.ModelAdmin):\n    def image_tag(self, obj):\n      return format_html('<img src=\"%s\" width=\"100\" height=\"60\" />' % escape(obj.photo.url))\n    image_tag.short_description = 'Image'\n    list_display = ('image_tag', 'model', 'brand', 'model_year', 'value', 'created_at')\n    list_filter = ('model', 'brand', 'model_year', 'value')\n    search_fields = ('model', 'brand', 'factory_year', 'model_year', 'value')\n    ordering = ['model', 'brand', 'factory_year', 'model_year', 'value']\n    fields = ('model', 'brand', 'description', 'factory_year', 'model_year', 'value', 'plate', 'photo')\nadmin.site.register(Brand, BrandAdmin)",
         "detail": "cars.admin",
         "documentation": {}
     },
@@ -811,8 +844,26 @@
         "kind": 6,
         "importPath": "cars.models",
         "description": "cars.models",
-        "peekOfCode": "class Car(models.Model):\n    id = models.AutoField(primary_key=True)\n    model = models.CharField(max_length=200)\n    description = models.TextField(blank=True, null=True)\n    brand = models.ForeignKey(Brand, on_delete=models.PROTECT, related_name='car_brand')\n    factory_year = models.IntegerField(blank=True, null=True)\n    model_year = models.IntegerField(blank=True, null=True)\n    plate = models.CharField(max_length=200, blank=True, null=True)\n    value = models.FloatField(blank=True, null=True)\n    photo = models.ImageField(upload_to='cars/', blank=True, null=True)",
+        "peekOfCode": "class Car(models.Model):\n    id = models.AutoField(primary_key=True)\n    model = models.CharField(max_length=200)\n    description = models.TextField(blank=True, null=True)\n    brand = models.ForeignKey(\n      Brand,\n      on_delete=models.PROTECT,\n      related_name='car_brand'\n    )\n    factory_year = models.IntegerField(blank=True, null=True)",
         "detail": "cars.models",
+        "documentation": {}
+    },
+    {
+        "label": "CarInventory",
+        "kind": 6,
+        "importPath": "cars.models",
+        "description": "cars.models",
+        "peekOfCode": "class CarInventory(models.Model):\n    cars_count = models.IntegerField()\n    cars_value = models.FloatField()\n    created_at = models.DateTimeField(auto_now_add=True)\n    updated_at = models.DateTimeField(auto_now=True)\n    class Meta:\n        ordering = ['-created_at']\n    def __str__(self):\n        return f'{self.cars_count} - {self.cars_value}'",
+        "detail": "cars.models",
+        "documentation": {}
+    },
+    {
+        "label": "update_inventory",
+        "kind": 2,
+        "importPath": "cars.signals",
+        "description": "cars.signals",
+        "peekOfCode": "def update_inventory():\n    cars_count = Car.objects.all().count()\n    cars_Value = Car.objects.all().aggregate(\n      total_value = Sum('value')\n    )['total_value']\n    CarInventory.objects.create(\n      cars_count=cars_count,\n      cars_value=cars_Value\n    )\n@receiver(pre_save, sender=Car)",
+        "detail": "cars.signals",
         "documentation": {}
     },
     {
@@ -820,7 +871,7 @@
         "kind": 2,
         "importPath": "cars.signals",
         "description": "cars.signals",
-        "peekOfCode": "def car_pre_save(sender, instance, **kwargs):\n    print('Car pre save signal')\n@receiver(post_save, sender=Car)\ndef car_post_save(sender, instance, **kwargs):\n    print('Car post save signal')\n@receiver(pre_delete, sender=Car)\ndef car_post_save(sender, instance, **kwargs):\n    print('Car pre delete signal')\n@receiver(post_delete, sender=Car)\ndef car_post_save(sender, instance, **kwargs):",
+        "peekOfCode": "def car_pre_save(sender, instance, **kwargs):\n    if not instance.description:\n        instance.description = f\"Carro {instance.model} da marca {instance.brand.name} ano {instance.model_year}\"\n@receiver(post_save, sender=Car)\ndef car_post_save(sender, instance, **kwargs):\n    update_inventory()\n@receiver(post_delete, sender=Car)\ndef car_post_delete(sender, instance, **kwargs):\n    update_inventory()",
         "detail": "cars.signals",
         "documentation": {}
     },
@@ -829,25 +880,16 @@
         "kind": 2,
         "importPath": "cars.signals",
         "description": "cars.signals",
-        "peekOfCode": "def car_post_save(sender, instance, **kwargs):\n    print('Car post save signal')\n@receiver(pre_delete, sender=Car)\ndef car_post_save(sender, instance, **kwargs):\n    print('Car pre delete signal')\n@receiver(post_delete, sender=Car)\ndef car_post_save(sender, instance, **kwargs):\n    print('Car post delete signal')",
+        "peekOfCode": "def car_post_save(sender, instance, **kwargs):\n    update_inventory()\n@receiver(post_delete, sender=Car)\ndef car_post_delete(sender, instance, **kwargs):\n    update_inventory()",
         "detail": "cars.signals",
         "documentation": {}
     },
     {
-        "label": "car_post_save",
+        "label": "car_post_delete",
         "kind": 2,
         "importPath": "cars.signals",
         "description": "cars.signals",
-        "peekOfCode": "def car_post_save(sender, instance, **kwargs):\n    print('Car pre delete signal')\n@receiver(post_delete, sender=Car)\ndef car_post_save(sender, instance, **kwargs):\n    print('Car post delete signal')",
-        "detail": "cars.signals",
-        "documentation": {}
-    },
-    {
-        "label": "car_post_save",
-        "kind": 2,
-        "importPath": "cars.signals",
-        "description": "cars.signals",
-        "peekOfCode": "def car_post_save(sender, instance, **kwargs):\n    print('Car post delete signal')",
+        "peekOfCode": "def car_post_delete(sender, instance, **kwargs):\n    update_inventory()",
         "detail": "cars.signals",
         "documentation": {}
     },
