@@ -6,6 +6,7 @@ from django.db.models.signals import (
 )
 from django.dispatch import receiver
 from cars.models import Car, CarInventory
+from ai_services.google_generativeai.client import get_car_ai_bio_google
 # sender is the model that sends the signal
 # instance is the instance of the model that sends the signal
 
@@ -32,7 +33,8 @@ def update_inventory():
 @receiver(pre_save, sender=Car)
 def car_pre_save(sender, instance, **kwargs):
     if not instance.description:
-        instance.description = f"Carro {instance.model} da marca {instance.brand.name} ano {instance.model_year}"
+        instance.description = get_car_ai_bio_google(instance.brand.name, instance.model, instance.model_year)
+
 
 @receiver(post_save, sender=Car)
 def car_post_save(sender, instance, **kwargs):

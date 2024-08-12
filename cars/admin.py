@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html, escape
-from cars.models import Car, Brand
+from cars.models import Brand, Car, Car, CarInventory
 
 # Register your models here.
 
@@ -27,5 +27,7 @@ class CarAdmin(admin.ModelAdmin):
     fields = ('model', 'brand', 'description', 'factory_year', 'model_year', 'value', 'plate', 'photo')
 
 
+admin.site.register(CarInventory)
 admin.site.register(Brand, BrandAdmin)
 admin.site.register(Car, CarAdmin)
+

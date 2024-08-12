@@ -241,6 +241,39 @@
         "documentation": {}
     },
     {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "google.generativeai",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "google.generativeai",
+        "description": "google.generativeai",
+        "detail": "google.generativeai",
+        "documentation": {}
+    },
+    {
+        "label": "OpenAI",
+        "importPath": "openai",
+        "description": "openai",
+        "isExtraImport": true,
+        "detail": "openai",
+        "documentation": {}
+    },
+    {
         "label": "get_asgi_application",
         "importPath": "django.core.asgi",
         "description": "django.core.asgi",
@@ -306,6 +339,14 @@
         "documentation": {}
     },
     {
+        "label": "Brand",
+        "importPath": "cars.models",
+        "description": "cars.models",
+        "isExtraImport": true,
+        "detail": "cars.models",
+        "documentation": {}
+    },
+    {
         "label": "Car",
         "importPath": "cars.models",
         "description": "cars.models",
@@ -314,7 +355,15 @@
         "documentation": {}
     },
     {
-        "label": "Brand",
+        "label": "Car",
+        "importPath": "cars.models",
+        "description": "cars.models",
+        "isExtraImport": true,
+        "detail": "cars.models",
+        "documentation": {}
+    },
+    {
+        "label": "CarInventory",
         "importPath": "cars.models",
         "description": "cars.models",
         "isExtraImport": true,
@@ -399,6 +448,14 @@
         "description": "django.dispatch",
         "isExtraImport": true,
         "detail": "django.dispatch",
+        "documentation": {}
+    },
+    {
+        "label": "get_car_ai_bio_google",
+        "importPath": "ai_services.google_generativeai.client",
+        "description": "ai_services.google_generativeai.client",
+        "isExtraImport": true,
+        "detail": "ai_services.google_generativeai.client",
         "documentation": {}
     },
     {
@@ -549,6 +606,33 @@
         "description": "accounts.views",
         "peekOfCode": "def register(request):\n  if request.method == 'POST':\n    user_form = UserCreationForm(request.POST)\n    if user_form.is_valid():\n      user_form.save()\n      return redirect('auth')\n    else:\n      messages.error(request, 'Erro ao criar usuário')\n      return redirect('register')\n  else:",
         "detail": "accounts.views",
+        "documentation": {}
+    },
+    {
+        "label": "get_car_ai_bio_google",
+        "kind": 2,
+        "importPath": "ai_services.google_generativeai.client",
+        "description": "ai_services.google_generativeai.client",
+        "peekOfCode": "def get_car_ai_bio_google(model, brand, year) -> str:\n    prompt = '''\n      Me mostre uma descrição de venda para o carro {} {} {} em apenas 250 caracteres.\n    '''\n    model = genai.GenerativeModel('gemini-1.5-flash')\n    response = model.generate_content(prompt.format(brand, model, year))\n    return response.text",
+        "detail": "ai_services.google_generativeai.client",
+        "documentation": {}
+    },
+    {
+        "label": "get_car_ai_bio",
+        "kind": 2,
+        "importPath": "ai_services.openai_api.client",
+        "description": "ai_services.openai_api.client",
+        "peekOfCode": "def get_car_ai_bio(model, brand, year):\n    prompt = '''\n      Me mostre uma descrição de venda para o carro da marca {}, modelo {}, ano {} em apenas 250 caracteres.\n    '''\n    response = client.chat.completions.create(\n        messages=[\n          {\n            \"role\": \"user\",\n            \"content\": prompt.format(brand, model, year)\n          }",
+        "detail": "ai_services.openai_api.client",
+        "documentation": {}
+    },
+    {
+        "label": "client",
+        "kind": 5,
+        "importPath": "ai_services.openai_api.client",
+        "description": "ai_services.openai_api.client",
+        "peekOfCode": "client = OpenAI(\n    api_key=os.environ.get('OPENAI_API_KEY')\n)\ndef get_car_ai_bio(model, brand, year):\n    prompt = '''\n      Me mostre uma descrição de venda para o carro da marca {}, modelo {}, ano {} em apenas 250 caracteres.\n    '''\n    response = client.chat.completions.create(\n        messages=[\n          {",
+        "detail": "ai_services.openai_api.client",
         "documentation": {}
     },
     {
@@ -808,7 +892,7 @@
         "kind": 6,
         "importPath": "cars.admin",
         "description": "cars.admin",
-        "peekOfCode": "class CarAdmin(admin.ModelAdmin):\n    def image_tag(self, obj):\n      return format_html('<img src=\"%s\" width=\"100\" height=\"60\" />' % escape(obj.photo.url))\n    image_tag.short_description = 'Image'\n    list_display = ('image_tag', 'model', 'brand', 'model_year', 'value', 'created_at')\n    list_filter = ('model', 'brand', 'model_year', 'value')\n    search_fields = ('model', 'brand', 'factory_year', 'model_year', 'value')\n    ordering = ['model', 'brand', 'factory_year', 'model_year', 'value']\n    fields = ('model', 'brand', 'description', 'factory_year', 'model_year', 'value', 'plate', 'photo')\nadmin.site.register(Brand, BrandAdmin)",
+        "peekOfCode": "class CarAdmin(admin.ModelAdmin):\n    def image_tag(self, obj):\n      return format_html('<img src=\"%s\" width=\"100\" height=\"60\" />' % escape(obj.photo.url))\n    image_tag.short_description = 'Image'\n    list_display = ('image_tag', 'model', 'brand', 'model_year', 'value', 'created_at')\n    list_filter = ('model', 'brand', 'model_year', 'value')\n    search_fields = ('model', 'brand', 'factory_year', 'model_year', 'value')\n    ordering = ['model', 'brand', 'factory_year', 'model_year', 'value']\n    fields = ('model', 'brand', 'description', 'factory_year', 'model_year', 'value', 'plate', 'photo')\nadmin.site.register(CarInventory)",
         "detail": "cars.admin",
         "documentation": {}
     },
@@ -871,7 +955,7 @@
         "kind": 2,
         "importPath": "cars.signals",
         "description": "cars.signals",
-        "peekOfCode": "def car_pre_save(sender, instance, **kwargs):\n    if not instance.description:\n        instance.description = f\"Carro {instance.model} da marca {instance.brand.name} ano {instance.model_year}\"\n@receiver(post_save, sender=Car)\ndef car_post_save(sender, instance, **kwargs):\n    update_inventory()\n@receiver(post_delete, sender=Car)\ndef car_post_delete(sender, instance, **kwargs):\n    update_inventory()",
+        "peekOfCode": "def car_pre_save(sender, instance, **kwargs):\n    if not instance.description:\n        instance.description = get_car_ai_bio_google(instance.brand.name, instance.model, instance.model_year)\n@receiver(post_save, sender=Car)\ndef car_post_save(sender, instance, **kwargs):\n    update_inventory()\n@receiver(post_delete, sender=Car)\ndef car_post_delete(sender, instance, **kwargs):\n    update_inventory()",
         "detail": "cars.signals",
         "documentation": {}
     },
