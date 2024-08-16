@@ -1,22 +1,31 @@
 import os
 from pathlib import Path
+import dj_database_url
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(BASE_DIR / '.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-fs@snor!uwkzyh*_e7*^ng4zk2ud1yypdwn=h&-#zgu-@--u4t'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', '0').lower() in ['true', 't', '1']
 
+DEBUG = os.environ.get('DEBUG', '0').lower() in ['true', 't', '1']
 
 APP_NAME = os.environ.get("FLY_APP_NAME")
 
-ALLOWED_HOSTS = [f"{APP_NAME}.fly.dev"]  # ← Updated!
+ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = [
+  os.environ.get("HOST_APP")
+]
 
 # Application definition
 
@@ -76,14 +85,8 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'carsfy',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost',
-        'PORT': '5432'
-        }
-    }
+    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'), conn_max_age=600),
+}
 
 
 # Password validation
